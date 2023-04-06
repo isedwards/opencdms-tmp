@@ -1,0 +1,19 @@
+@startuml
+digraph g1 {
+node[shape=record]
+nodesep=1;
+
+observation [label="{observation|atomic object containing }"]
+host
+observer
+collection
+
+{rank=same; host; observer;}
+
+observation -> host
+observation -> observer
+collection -> observation
+host -> observer
+
+}
+@enduml

@@ -3,7 +3,7 @@ from sqlalchemy import create_engine, text
 from sqlalchemy_utils import database_exists, create_database, drop_database
 from sqlalchemy.orm import sessionmaker
 
-from opencdms.provider import opencdmsdb
+from opencdms.adapters import opencdmsdb
 
 
 # set connection details

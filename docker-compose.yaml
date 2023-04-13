@@ -14,14 +14,13 @@ services:
   # nginx reverse proxy providing https access to pygeoapi **dev** server
   nginx:
     build:
-      context: .
-      dockerfile: Dockerfile.nginx
+      context: ./containers/nginx/
+      dockerfile: Dockerfile
     ports:
       - "80:80"
       - "443:443"
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
-      - ./certs:/etc/nginx/certs
       - /etc/letsencrypt:/etc/letsencrypt
     environment:
       DOMAIN: api.opencdms.org
@@ -30,6 +29,11 @@ services:
       - api
     command: "/bin/bash -c 'certbot certonly --webroot -w /var/www/certbot -d $$DOMAIN --email $$EMAIL --agree-tos --no-eff-email --keep-until-expiring && nginx -t && service nginx start && while :; do sleep 12h & wait $${!}; certbot renew; service nginx reload; done & nginx -g \"daemon off;\"'"
 
+  # The database service uses a named volume called `postgres` to persist its data
+  # outside the container. This allows the data to survive container deletion or
+  # recreation. The named volume will be created automatically by Docker Compose
+  # unless it already exists. The data will be stored in the Docker Volumes area
+  # on the host system.
   database:
     build:
       context: .

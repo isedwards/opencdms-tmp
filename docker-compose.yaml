@@ -20,7 +20,7 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./containers/nginx/nginx.conf:/etc/nginx/nginx.conf
     environment:
       DOMAIN: api.opencdms.org
       EMAIL: info@opencdms.org

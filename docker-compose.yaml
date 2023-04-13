@@ -36,7 +36,7 @@ services:
                           cp /etc/letsencrypt/live/$$DOMAIN/privkey.pem /etc/nginx/ssl/nginx.key && \
                           nginx -t && \
                           service nginx start && \
-                          while :; do sleep 12h & wait $${!}; certbot renew; cp /etc/letsencrypt/live/$$DOMAIN/fullchain.pem /etc/nginx/ssl/nginx.crt && cp /etc/letsencrypt/live/$$DOMAIN/privkey.pem /etc/nginx/ssl/nginx.key && service nginx reload; done & \
+                          while '\''true'\''; do sleep 12h & wait -n $${!}; certbot renew; cp /etc/letsencrypt/live/$$DOMAIN/fullchain.pem /etc/nginx/ssl/nginx.crt && cp /etc/letsencrypt/live/$$DOMAIN/privkey.pem /etc/nginx/ssl/nginx.key && service nginx reload; done & \
                           nginx -g "daemon off;"'
 
   # The database service uses a named volume called `postgres` to persist its data

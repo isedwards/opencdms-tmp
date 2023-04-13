@@ -1,4 +1,11 @@
 #!/bin/bash
+# This script uses Certbot to generate SSL certificates in standalone mode.
+# It assumes that Nginx is installed and configured on the same machine.
+# The generated SSL files are copied to /etc/nginx/ssl/ and used to secure
+# HTTPS connections to the specified domain.
+# The script sets up a renewal cron job for the SSL certificates, which runs
+# every 12 hours, and reloads Nginx to apply the renewed certificates.
+
 
 DOMAIN=${DOMAIN:-api.opencdms.org}
 EMAIL=${EMAIL:-info@opencdms.org}

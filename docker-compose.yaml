@@ -26,11 +26,6 @@ services:
       EMAIL: info@opencdms.org
     depends_on:
       - api
-    # Run Certbot in standalone mode to generate the SSL certificates
-    # Copy the generated fullchain.pem and privkey.pem files to the
-    # /etc/nginx/ssl/ directory in the container and start/verify.
-    # Then set up a renewal cron job for the SSL certificates and
-    # starts nginx in the foreground.
     command: nginx_startup.sh
 
   # The database service uses a named volume called `postgres` to persist its data

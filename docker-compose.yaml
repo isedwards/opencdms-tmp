@@ -31,13 +31,7 @@ services:
     # /etc/nginx/ssl/ directory in the container and start/verify.
     # Then set up a renewal cron job for the SSL certificates and
     # starts nginx in the foreground.
-    command: /bin/bash -c 'certbot certonly --standalone -d $$DOMAIN --email $$EMAIL --agree-tos --no-eff-email && \
-                          cp /etc/letsencrypt/live/$$DOMAIN/fullchain.pem /etc/nginx/ssl/nginx.crt && \
-                          cp /etc/letsencrypt/live/$$DOMAIN/privkey.pem /etc/nginx/ssl/nginx.key && \
-                          nginx -t && \
-                          service nginx start && \
-                          while '\''true'\''; do sleep 12h & wait -n $${!}; certbot renew; cp /etc/letsencrypt/live/$$DOMAIN/fullchain.pem /etc/nginx/ssl/nginx.crt && cp /etc/letsencrypt/live/$$DOMAIN/privkey.pem /etc/nginx/ssl/nginx.key && service nginx reload; done & \
-                          nginx -g "daemon off;"'
+    command: nginx_startup.sh
 
   # The database service uses a named volume called `postgres` to persist its data
   # outside the container. This allows the data to survive container deletion or

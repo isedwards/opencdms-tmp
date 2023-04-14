@@ -1,6 +1,32 @@
 components:
   parameters:
+    bbox:
+      description: Only features that have a geometry that intersects the bounding
+        box are selected.The bounding box is provided as four or six numbers, depending
+        on whether the coordinate reference system includes a vertical axis (height
+        or depth).
+      explode: false
+      in: query
+      name: bbox
+      required: false
+      schema:
+        items:
+          type: number
+        maxItems: 6
+        minItems: 4
+        type: array
+      style: form
     bbox-crs:
+      description: Indicates the coordinate reference system for the given bbox coordinates.
+      explode: false
+      in: query
+      name: bbox-crs
+      required: false
+      schema:
+        format: uri
+        type: string
+      style: form
+    bbox-crs-epsg:
       description: Indicates the EPSG for the given bbox coordinates.
       explode: false
       in: query
@@ -9,6 +35,16 @@ components:
       schema:
         default: 4326
         type: integer
+      style: form
+    crs:
+      description: Indicates the coordinate reference system for the results.
+      explode: false
+      in: query
+      name: crs
+      required: false
+      schema:
+        format: uri
+        type: string
       style: form
     f:
       description: The optional f parameter indicates the output format which the
@@ -247,8 +283,10 @@ paths:
           enum:
           - en-US
           type: string
-      - $ref: https://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/ogcapi-features-1.yaml#/components/parameters/bbox
+      - $ref: '#/components/parameters/bbox'
       - $ref: https://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/ogcapi-features-1.yaml#/components/parameters/limit
+      - $ref: '#/components/parameters/crs'
+      - $ref: '#/components/parameters/bbox-crs'
       - description: The properties that should be included for each feature. The
           parameter value is a comma-separated list of property names.
         explode: false
@@ -492,6 +530,7 @@ paths:
       operationId: getCa_climFeature
       parameters:
       - $ref: https://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/ogcapi-features-1.yaml#/components/parameters/featureId
+      - $ref: '#/components/parameters/crs'
       - $ref: '#/components/parameters/f'
       - $ref: '#/components/parameters/lang'
       responses:
@@ -551,8 +590,10 @@ paths:
       parameters:
       - *id001
       - *id002
-      - $ref: https://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/ogcapi-features-1.yaml#/components/parameters/bbox
+      - $ref: '#/components/parameters/bbox'
       - $ref: https://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/ogcapi-features-1.yaml#/components/parameters/limit
+      - $ref: '#/components/parameters/crs'
+      - $ref: '#/components/parameters/bbox-crs'
       - description: The properties that should be included for each feature. The
           parameter value is a comma-separated list of property names.
         explode: false
@@ -739,6 +780,7 @@ paths:
       operationId: getCa_stationsFeature
       parameters:
       - $ref: https://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/ogcapi-features-1.yaml#/components/parameters/featureId
+      - $ref: '#/components/parameters/crs'
       - $ref: '#/components/parameters/f'
       - $ref: '#/components/parameters/lang'
       responses:

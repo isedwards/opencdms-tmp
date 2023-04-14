@@ -12,10 +12,13 @@ version: '3.3'
 
 services:
   # nginx reverse proxy providing https access to `pygeoapi serve` **dev** server
+  # We specify a custom image name and tag, otherwise the commands in the Dockerfile
+  # are not executed and instead we would just get the vanilla nginx:latest container
   nginx:
     build:
       context: ./containers/nginx/
       dockerfile: Dockerfile
+    image: opencdms-nginx:latest
     ports:
       - "80:80"
       - "443:443"

@@ -1,8 +1,7 @@
 FROM nginx:latest
 
-COPY nginx.conf /etc/nginx/nginx.conf
-
-EXPOSE 80 443
+RUN mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf.disabled
+COPY nginx.conf /etc/nginx/conf.d/api1.opencdms.org.conf
 
 # Install Certbot and OpenSSL
 RUN apt-get update \

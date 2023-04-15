@@ -6,7 +6,7 @@
 # The script sets up a renewal cron job for the SSL certificates, which runs
 # every 12 hours, and reloads Nginx to apply the renewed certificates.
 
-DOMAIN=${DOMAIN:-api1.opencdms.org}
+DOMAIN=${DOMAIN:-api.opencdms.org}
 EMAIL=${EMAIL:-info@opencdms.org}
 
 # stopping the service would cause the container to stop

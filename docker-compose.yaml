@@ -27,7 +27,7 @@ services:
       - /etc/letsencrypt:/etc/letsencrypt
       - /tmp/acme_challenge:/tmp/acme_challenge
     environment:
-      DOMAIN: api1.opencdms.org
+      DOMAIN: api.opencdms.org
       EMAIL: info@opencdms.org
     depends_on:
       - api

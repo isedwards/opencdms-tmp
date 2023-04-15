@@ -1,7 +1,7 @@
 FROM nginx:latest
 
 RUN mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf.disabled
-COPY nginx.conf /etc/nginx/conf.d/api1.opencdms.org.conf
+COPY nginx.conf /etc/nginx/conf.d/api.opencdms.org.conf
 
 # Install Certbot and OpenSSL
 RUN apt-get update \
@@ -15,7 +15,7 @@ RUN mkdir -p /etc/nginx/ssl
 RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
     -keyout /etc/nginx/ssl/nginx.key \
     -out /etc/nginx/ssl/nginx.crt \
-    -subj "/C=US/ST=YourState/L=YourCity/O=YourOrganization/OU=YourDepartment/CN=api.opencdms.org"
+    -subj "/C=UK/ST=Devon/L=Exeter/O=OpenCDMS/OU=e3s/CN=api.opencdms.org"
 
 # Copy the startup script
 COPY nginx_startup.sh /usr/local/bin/

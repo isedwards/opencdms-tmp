@@ -6,16 +6,15 @@
 # The script sets up a renewal cron job for the SSL certificates, which runs
 # every 12 hours, and reloads Nginx to apply the renewed certificates.
 
-
-DOMAIN=${DOMAIN:-api.opencdms.org}
+DOMAIN=${DOMAIN:-api1.opencdms.org}
 EMAIL=${EMAIL:-info@opencdms.org}
 
-certbot certonly --standalone -d $DOMAIN --email $EMAIL --agree-tos --no-eff-email
+# stopping the service would cause the container to stop
+# service nginx stop
+
+certbot certonly --standalone -d $DOMAIN --email $EMAIL --agree-tos --no-eff-email --non-interactive
 cp /etc/letsencrypt/live/$DOMAIN/fullchain.pem /etc/nginx/ssl/nginx.crt
 cp /etc/letsencrypt/live/$DOMAIN/privkey.pem /etc/nginx/ssl/nginx.key
-
-nginx -t
-service nginx start
 
 while true; do
     sleep 12h & wait -n ${!}
@@ -25,4 +24,13 @@ while true; do
     service nginx reload
 done &
 
-nginx -g "daemon off;"
+nginx -t
+
+# Run in the foreground attached to the terminal to view logs
+# (not recommended for production)
+# - We can't do this when nginx aleady running as a service (port conflicts)
+# nginx -g "daemon off;"
+
+# Restarting the service will stop the container, just reload instead
+service nginx reload
+

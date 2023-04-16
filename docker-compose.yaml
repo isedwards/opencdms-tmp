@@ -14,6 +14,9 @@ services:
   # nginx reverse proxy providing https access to `pygeoapi serve` **dev** server
   # We specify a custom image name and tag, otherwise the commands in the Dockerfile
   # are not executed and instead we would just get the vanilla nginx:latest container
+  # TODO:
+  # Currently - to create cert, certbot can't listed on port 80, so temporarily
+  # comment 80:80 and uncomment 80:8800 so the cert can be created then put back
   nginx:
     build:
       context: ./containers/nginx/
@@ -23,6 +26,7 @@ services:
     ports:
       - 80:80
       - 443:443
+      #- 80:8800
     volumes:
       - /etc/letsencrypt:/etc/letsencrypt
       - /tmp/acme_challenge:/tmp/acme_challenge
@@ -31,7 +35,7 @@ services:
       EMAIL: info@opencdms.org
     depends_on:
       - api
-    # Exec on container and running manually worked...
+    # TODO: docker exec -it opencdms-nginx bash  # nginx_startup.sh
     #command: nginx_startup.sh
 
   # The database service uses a named volume called `postgres` to persist its data

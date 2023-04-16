@@ -10,9 +10,9 @@ DOMAIN=${DOMAIN:-api.opencdms.org}
 EMAIL=${EMAIL:-info@opencdms.org}
 
 # stopping the service would cause the container to stop
-# service nginx stop
+# so we get certbot to use port 8800 instead of default port 80
 
-certbot certonly --standalone -d $DOMAIN --email $EMAIL --agree-tos --no-eff-email --non-interactive
+certbot certonly --standalone -d $DOMAIN --email $EMAIL --agree-tos --no-eff-email --non-interactive --http-01-port 8800
 cp /etc/letsencrypt/live/$DOMAIN/fullchain.pem /etc/nginx/ssl/nginx.crt
 cp /etc/letsencrypt/live/$DOMAIN/privkey.pem /etc/nginx/ssl/nginx.key
 

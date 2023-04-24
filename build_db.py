@@ -3,7 +3,7 @@ from sqlalchemy import create_engine, text
 from sqlalchemy_utils import database_exists, create_database, drop_database
 from sqlalchemy.orm import sessionmaker
 
-from opencdms.provider import opencdmsdb
+from opencdms.adapters import opencdmsdb
 
 
 # set connection details
@@ -36,17 +36,33 @@ session = sessionmaker(bind=engine)()
 cursor = session.connection().connection.cursor()
 
 code_tables = {
+    "cdm.user": "user.csv",
+    "cdm.status": "status.csv",
     "cdm.observation_type": "observation_type.csv",
+    "cdm.facility_type": "facility_type.csv",
+    "cdm.feature_type": "feature_type.csv",
+    "cdm.wmo_region": "wmo_region.csv",
+    "cdm.territory": "territory.csv",
     "cdm.observed_property": "observed_property.csv",
     "cdm.observing_procedure": "observing_procedure.csv",
-    "cdm.user": "users.csv",
-    "cdm.record_status": "status.csv",
+    "cdm.time_zone": "time_zone.csv",
     "cdm.source_type": "source_type.csv",
-    "cdm.source": "source.csv",
+    "cdm.media_type": "media_type.csv",
+    "cdm.climate_zone": "climate_zone.csv",
+    "cdm.surface_cover": "surface_cover.csv",
+    "cdm.surface_roughness": "surface_roughness.csv",
+    "cdm.topography": "topography.csv",
+    "cdm.season": "season.csv",
+    "cdm.programme": "programme.csv",
+    "cdm.observing_method": "observing_method.csv",
+    "cdm.exposure": "exposure.csv",
+    "cdm.reference_surface": "reference_surface.csv",
+    "cdm.role": "role.csv"
 }
 # note, order is important
 data_tables = {
     "cdm.host": ["hosts.csv"],
+    "cdm.source": ["source.csv"],
     "cdm.observation": ["CA_6016527_1990.csv"]
 }
 

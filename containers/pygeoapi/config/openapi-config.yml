@@ -312,16 +312,16 @@ paths:
             - observer_id
             - observed_property_id
             - observing_procedure_id
-            - report_id
             - collection_id
             - parameter
-            - feature_of_interest_id
-            - version
-            - change_date
-            - user_id
-            - status_id
+            - feature_id
+            - _version
+            - _change_date
+            - _user_id
+            - _status_id
             - comments
-            - source_id
+            - _source_id
+            - _source_identifier
             type: string
           type: array
         style: form
@@ -349,7 +349,7 @@ paths:
         name: observation_type_id
         required: false
         schema:
-          type: INTEGER
+          type: VARCHAR
         style: form
       - explode: false
         in: query
@@ -433,18 +433,11 @@ paths:
         name: observed_property_id
         required: false
         schema:
-          type: INTEGER
+          type: VARCHAR
         style: form
       - explode: false
         in: query
         name: observing_procedure_id
-        required: false
-        schema:
-          type: INTEGER
-        style: form
-      - explode: false
-        in: query
-        name: report_id
         required: false
         schema:
           type: VARCHAR
@@ -465,38 +458,38 @@ paths:
         style: form
       - explode: false
         in: query
-        name: feature_of_interest_id
+        name: feature_id
         required: false
         schema:
           type: VARCHAR
         style: form
       - explode: false
         in: query
-        name: version
+        name: _version
         required: false
         schema:
           type: INTEGER
         style: form
       - explode: false
         in: query
-        name: change_date
+        name: _change_date
         required: false
         schema:
           type: TIMESTAMP
         style: form
       - explode: false
         in: query
-        name: user_id
+        name: _user_id
         required: false
         schema:
           type: VARCHAR
         style: form
       - explode: false
         in: query
-        name: status_id
+        name: _status_id
         required: false
         schema:
-          type: INTEGER
+          type: VARCHAR
         style: form
       - explode: false
         in: query
@@ -507,7 +500,14 @@ paths:
         style: form
       - explode: false
         in: query
-        name: source_id
+        name: _source_id
+        required: false
+        schema:
+          type: VARCHAR
+        style: form
+      - explode: false
+        in: query
+        name: _source_identifier
         required: false
         schema:
           type: VARCHAR
@@ -609,19 +609,19 @@ paths:
             - links
             - elevation
             - wigos_station_identifier
-            - facility_type
+            - facility_type_id
             - date_established
             - date_closed
-            - wmo_region
-            - territory
+            - wmo_region_id
+            - territory_id
+            - time_zone_id
             - valid_from
             - valid_to
-            - version
-            - change_date
-            - user_id
-            - status_id
+            - _version
+            - _change_date
+            - _user_id
+            - _status_id
             - comments
-            - time_zone_id
             type: string
           type: array
         style: form
@@ -673,7 +673,7 @@ paths:
         style: form
       - explode: false
         in: query
-        name: facility_type
+        name: facility_type_id
         required: false
         schema:
           type: VARCHAR
@@ -694,14 +694,21 @@ paths:
         style: form
       - explode: false
         in: query
-        name: wmo_region
+        name: wmo_region_id
         required: false
         schema:
           type: VARCHAR
         style: form
       - explode: false
         in: query
-        name: territory
+        name: territory_id
+        required: false
+        schema:
+          type: VARCHAR
+        style: form
+      - explode: false
+        in: query
+        name: time_zone_id
         required: false
         schema:
           type: VARCHAR
@@ -722,31 +729,31 @@ paths:
         style: form
       - explode: false
         in: query
-        name: version
+        name: _version
         required: false
         schema:
           type: INTEGER
         style: form
       - explode: false
         in: query
-        name: change_date
+        name: _change_date
         required: false
         schema:
           type: TIMESTAMP
         style: form
       - explode: false
         in: query
-        name: user_id
+        name: _user_id
         required: false
         schema:
           type: VARCHAR
         style: form
       - explode: false
         in: query
-        name: status_id
+        name: _status_id
         required: false
         schema:
-          type: INTEGER
+          type: VARCHAR
         style: form
       - explode: false
         in: query
@@ -754,13 +761,6 @@ paths:
         required: false
         schema:
           type: VARCHAR
-        style: form
-      - explode: false
-        in: query
-        name: time_zone_id
-        required: false
-        schema:
-          type: INTEGER
         style: form
       responses:
         '200':

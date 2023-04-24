@@ -1,0 +1,6 @@
+id|name|description|links|_version|_change_date|_user|_status|comments
+tag:beta.opencdms.org,2023:/vocab/season/annual|Annual|Annual|NA|1|NA|tag:beta.opencdms.org,2023:/data/user/default|tag:beta.opencdms.org,2023:/vocab/status/latest|NA
+tag:beta.opencdms.org,2023:/vocab/season/winter|Winter|Meteorological winter|NA|1|NA|tag:beta.opencdms.org,2023:/data/user/default|tag:beta.opencdms.org,2023:/vocab/status/latest|NA
+tag:beta.opencdms.org,2023:/vocab/season/spring|Spring|Meteorological spring|NA|1|NA|tag:beta.opencdms.org,2023:/data/user/default|tag:beta.opencdms.org,2023:/vocab/status/latest|NA
+tag:beta.opencdms.org,2023:/vocab/season/summer|Summer|Meteorological summer|NA|1|NA|tag:beta.opencdms.org,2023:/data/user/default|tag:beta.opencdms.org,2023:/vocab/status/latest|NA
+tag:beta.opencdms.org,2023:/vocab/season/autumn|Autumn|Meteorological autumn|NA|1|NA|tag:beta.opencdms.org,2023:/data/user/default|tag:beta.opencdms.org,2023:/vocab/status/latest|NA

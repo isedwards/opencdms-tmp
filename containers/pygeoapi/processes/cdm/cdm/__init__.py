@@ -27,7 +27,7 @@ from pygeoapi.process.base import BaseProcessor, ProcessorExecuteError
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker
 
-from opencdms.provider import opencdmsdb
+from opencdms.adapters import opencdmsdb
 
 LOGGER = logging.getLogger(__name__)
 

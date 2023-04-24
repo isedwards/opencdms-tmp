@@ -1,0 +1,5 @@
+id|name|description
+tag:beta.opencdms.org,2023:/vocab/status/latest|latest|The latest version of this record
+tag:beta.opencdms.org,2023:/vocab/status/draft|draft|Draft version of this record
+tag:beta.opencdms.org,2023:/vocab/status/archived|archived|Archived version of this record
+tag:beta.opencdms.org,2023:/vocab/status/deleted|deleted|Record marked for deletion

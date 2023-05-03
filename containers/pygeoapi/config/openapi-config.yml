@@ -1,6 +1,32 @@
 components:
   parameters:
+    bbox:
+      description: Only features that have a geometry that intersects the bounding
+        box are selected.The bounding box is provided as four or six numbers, depending
+        on whether the coordinate reference system includes a vertical axis (height
+        or depth).
+      explode: false
+      in: query
+      name: bbox
+      required: false
+      schema:
+        items:
+          type: number
+        maxItems: 6
+        minItems: 4
+        type: array
+      style: form
     bbox-crs:
+      description: Indicates the coordinate reference system for the given bbox coordinates.
+      explode: false
+      in: query
+      name: bbox-crs
+      required: false
+      schema:
+        format: uri
+        type: string
+      style: form
+    bbox-crs-epsg:
       description: Indicates the EPSG for the given bbox coordinates.
       explode: false
       in: query
@@ -9,6 +35,16 @@ components:
       schema:
         default: 4326
         type: integer
+      style: form
+    crs:
+      description: Indicates the coordinate reference system for the results.
+      explode: false
+      in: query
+      name: crs
+      required: false
+      schema:
+        format: uri
+        type: string
       style: form
     f:
       description: The optional f parameter indicates the output format which the
@@ -247,8 +283,10 @@ paths:
           enum:
           - en-US
           type: string
-      - $ref: https://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/ogcapi-features-1.yaml#/components/parameters/bbox
+      - $ref: '#/components/parameters/bbox'
       - $ref: https://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/ogcapi-features-1.yaml#/components/parameters/limit
+      - $ref: '#/components/parameters/crs'
+      - $ref: '#/components/parameters/bbox-crs'
       - description: The properties that should be included for each feature. The
           parameter value is a comma-separated list of property names.
         explode: false
@@ -274,16 +312,16 @@ paths:
             - observer_id
             - observed_property_id
             - observing_procedure_id
-            - report_id
             - collection_id
             - parameter
-            - feature_of_interest_id
-            - version
-            - change_date
-            - user_id
-            - status_id
+            - feature_id
+            - _version
+            - _change_date
+            - _user_id
+            - _status_id
             - comments
-            - source_id
+            - _source_id
+            - _source_identifier
             type: string
           type: array
         style: form
@@ -311,7 +349,7 @@ paths:
         name: observation_type_id
         required: false
         schema:
-          type: INTEGER
+          type: VARCHAR
         style: form
       - explode: false
         in: query
@@ -395,18 +433,11 @@ paths:
         name: observed_property_id
         required: false
         schema:
-          type: INTEGER
+          type: VARCHAR
         style: form
       - explode: false
         in: query
         name: observing_procedure_id
-        required: false
-        schema:
-          type: INTEGER
-        style: form
-      - explode: false
-        in: query
-        name: report_id
         required: false
         schema:
           type: VARCHAR
@@ -427,38 +458,38 @@ paths:
         style: form
       - explode: false
         in: query
-        name: feature_of_interest_id
+        name: feature_id
         required: false
         schema:
           type: VARCHAR
         style: form
       - explode: false
         in: query
-        name: version
+        name: _version
         required: false
         schema:
           type: INTEGER
         style: form
       - explode: false
         in: query
-        name: change_date
+        name: _change_date
         required: false
         schema:
           type: TIMESTAMP
         style: form
       - explode: false
         in: query
-        name: user_id
+        name: _user_id
         required: false
         schema:
           type: VARCHAR
         style: form
       - explode: false
         in: query
-        name: status_id
+        name: _status_id
         required: false
         schema:
-          type: INTEGER
+          type: VARCHAR
         style: form
       - explode: false
         in: query
@@ -469,7 +500,14 @@ paths:
         style: form
       - explode: false
         in: query
-        name: source_id
+        name: _source_id
+        required: false
+        schema:
+          type: VARCHAR
+        style: form
+      - explode: false
+        in: query
+        name: _source_identifier
         required: false
         schema:
           type: VARCHAR
@@ -492,6 +530,7 @@ paths:
       operationId: getCa_climFeature
       parameters:
       - $ref: https://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/ogcapi-features-1.yaml#/components/parameters/featureId
+      - $ref: '#/components/parameters/crs'
       - $ref: '#/components/parameters/f'
       - $ref: '#/components/parameters/lang'
       responses:
@@ -551,8 +590,10 @@ paths:
       parameters:
       - *id001
       - *id002
-      - $ref: https://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/ogcapi-features-1.yaml#/components/parameters/bbox
+      - $ref: '#/components/parameters/bbox'
       - $ref: https://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/ogcapi-features-1.yaml#/components/parameters/limit
+      - $ref: '#/components/parameters/crs'
+      - $ref: '#/components/parameters/bbox-crs'
       - description: The properties that should be included for each feature. The
           parameter value is a comma-separated list of property names.
         explode: false
@@ -568,19 +609,19 @@ paths:
             - links
             - elevation
             - wigos_station_identifier
-            - facility_type
+            - facility_type_id
             - date_established
             - date_closed
-            - wmo_region
-            - territory
+            - wmo_region_id
+            - territory_id
+            - time_zone_id
             - valid_from
             - valid_to
-            - version
-            - change_date
-            - user_id
-            - status_id
+            - _version
+            - _change_date
+            - _user_id
+            - _status_id
             - comments
-            - time_zone_id
             type: string
           type: array
         style: form
@@ -632,7 +673,7 @@ paths:
         style: form
       - explode: false
         in: query
-        name: facility_type
+        name: facility_type_id
         required: false
         schema:
           type: VARCHAR
@@ -653,14 +694,21 @@ paths:
         style: form
       - explode: false
         in: query
-        name: wmo_region
+        name: wmo_region_id
         required: false
         schema:
           type: VARCHAR
         style: form
       - explode: false
         in: query
-        name: territory
+        name: territory_id
+        required: false
+        schema:
+          type: VARCHAR
+        style: form
+      - explode: false
+        in: query
+        name: time_zone_id
         required: false
         schema:
           type: VARCHAR
@@ -681,31 +729,31 @@ paths:
         style: form
       - explode: false
         in: query
-        name: version
+        name: _version
         required: false
         schema:
           type: INTEGER
         style: form
       - explode: false
         in: query
-        name: change_date
+        name: _change_date
         required: false
         schema:
           type: TIMESTAMP
         style: form
       - explode: false
         in: query
-        name: user_id
+        name: _user_id
         required: false
         schema:
           type: VARCHAR
         style: form
       - explode: false
         in: query
-        name: status_id
+        name: _status_id
         required: false
         schema:
-          type: INTEGER
+          type: VARCHAR
         style: form
       - explode: false
         in: query
@@ -713,13 +761,6 @@ paths:
         required: false
         schema:
           type: VARCHAR
-        style: form
-      - explode: false
-        in: query
-        name: time_zone_id
-        required: false
-        schema:
-          type: INTEGER
         style: form
       responses:
         '200':
@@ -739,6 +780,7 @@ paths:
       operationId: getCa_stationsFeature
       parameters:
       - $ref: https://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/ogcapi-features-1.yaml#/components/parameters/featureId
+      - $ref: '#/components/parameters/crs'
       - $ref: '#/components/parameters/f'
       - $ref: '#/components/parameters/lang'
       responses:

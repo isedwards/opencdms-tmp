@@ -1,0 +1,10 @@
+id|name|description|links|_version|_change_date|_user_id|_status_id|comments
+tag:beta.opencdms.org,2023:/vocab/wmo_region/unknown|Unknown|Unknown|NA|1|NA|tag:beta.opencdms.org,2023:/data/user/default|tag:beta.opencdms.org,2023:/vocab/status/latest|NA
+tag:beta.opencdms.org,2023:/vocab/wmo_region/I|Region I|Africa|NA|1|NA|tag:beta.opencdms.org,2023:/data/user/default|tag:beta.opencdms.org,2023:/vocab/status/latest|NA
+tag:beta.opencdms.org,2023:/vocab/wmo_region/II|Region II|Asia|NA|1|NA|tag:beta.opencdms.org,2023:/data/user/default|tag:beta.opencdms.org,2023:/vocab/status/latest|NA
+tag:beta.opencdms.org,2023:/vocab/wmo_region/III|Region III|South America|NA|1|NA|tag:beta.opencdms.org,2023:/data/user/default|tag:beta.opencdms.org,2023:/vocab/status/latest|NA
+tag:beta.opencdms.org,2023:/vocab/wmo_region/IV|Region IV|North America, Central America and the Caribbean|NA|1|NA|tag:beta.opencdms.org,2023:/data/user/default|tag:beta.opencdms.org,2023:/vocab/status/latest|NA
+tag:beta.opencdms.org,2023:/vocab/wmo_region/V|Region V|South-West Pacific|NA|1|NA|tag:beta.opencdms.org,2023:/data/user/default|tag:beta.opencdms.org,2023:/vocab/status/latest|NA
+tag:beta.opencdms.org,2023:/vocab/wmo_region/VI|Region VI|Europe|NA|1|NA|tag:beta.opencdms.org,2023:/data/user/default|tag:beta.opencdms.org,2023:/vocab/status/latest|NA
+tag:beta.opencdms.org,2023:/vocab/wmo_region/antarctica|Antarctica|Antarctica|NA|1|NA|tag:beta.opencdms.org,2023:/data/user/default|tag:beta.opencdms.org,2023:/vocab/status/latest|NA
+tag:beta.opencdms.org,2023:/vocab/wmo_region/inapplicable|Inapplicable|Inapplicable|NA|1|NA|tag:beta.opencdms.org,2023:/data/user/default|tag:beta.opencdms.org,2023:/vocab/status/latest|NA
